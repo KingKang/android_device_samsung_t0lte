@@ -41,7 +41,6 @@ on boot
     ifup lo
     hostname localhost
     domainname localdomain
-
     class_start default
 
 service debuggerd /system/bin/debuggerd
@@ -74,4 +73,3 @@ on property:persist.service.adb.enable=1
 
 on property:persist.service.adb.enable=0
     stop adbd
-
