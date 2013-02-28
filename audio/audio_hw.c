@@ -503,7 +503,7 @@ static void end_call(struct m0_audio_device *adev)
     adev->pcm_modem_dl = NULL;
     adev->pcm_modem_ul = NULL;
 
-    if (bt_on)  || old_rx_dev == DEVICE_BT_SCO_RX_ACDB_ID) {
+    if (bt_on || old_rx_dev == DEVICE_BT_SCO_RX_ACDB_ID) {
         if (adev->pcm_bt_dl != NULL) {
             ALOGD("Stopping bluetooth DL PCM");
             pcm_stop(adev->pcm_bt_dl);
@@ -594,7 +594,7 @@ static void set_incall_device(struct m0_audio_device *adev)
     }
 
     adev_set_voice_volume(&adev->hw_device, adev->voice_volume);
-    
+
     /* Restart pcm only if switching off or onto bt to adjust to amr */
     if(old_rx_dev == DEVICE_BT_SCO_RX_ACDB_ID || rx_dev_id == DEVICE_BT_SCO_RX_ACDB_ID){
         ALOGI("%s: old_rx_dev: %i", __func__, old_rx_dev);
@@ -661,6 +661,7 @@ static void select_mode(struct m0_audio_device *adev)
             } else
                 adev->out_device &= ~AUDIO_DEVICE_OUT_SPEAKER;
             select_output_device(adev);
+            start_call(adev);
             adev->in_call = 1;
         }
     } else {
