@@ -16,6 +16,7 @@
 #
 
 -include device/samsung/smdk4412-common/BoardCommonConfig.mk
+-include device/samsung/smdk4412-qcom-common/BoardCommonConfig.mk
 
 LOCAL_PATH := device/samsung/t0lte
 
